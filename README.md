@@ -1,5 +1,23 @@
 ### JSP with Connection pool on Wildfly
+`sh
+	
+	├── REAMD.md
+	├── WebContent
+	│   ├── META-INF
+	│   │   └── MANIFEST.MF
+	│   ├── WEB-INF
+	│   │   ├── lib
+	│   │   │   ├── jstl-1.2.jar
+	│   │   │   ├── jstl-standard.jar
+	│   │   │   └── ojdbc7.jar
+	│   │   └── web.xml
+	│   ├── index.html
+	│   ├── index.jsp    (Example using connection pool)
+	│   └── index2.jsp   (JDBC using connection pool)
+	└── src
 
+
+`
 
 ### Oracle 
 
@@ -76,6 +94,29 @@ docker cp ~/Downloads/my-web.war /opt/jboss/wildfly/standalone/deployments/
 `
 	
 	
+### Connection Pool Using Java
+	
+`java
+	Context ic = new InitialContext();
+	 DataSource ds = (DataSource) ic.lookup("java:jboss/datasources/OracleDS");
+	 Connection con = ds.getConnection();
+	 Statement stmt = con.createStatement();
+	 String sql = "";
+	 ResultSet rs;
+	 sql = "SELECT owner, table_name FROM all_tables";
+	 rs = stmt.executeQuery(sql);
+	 while(rs.next()){
+	  out.println(rs.getString("owner")+ " " + rs.getString("table_name") + "<br/>");
+	 }
+	 if(rs != null)
+	     rs.close();
+	 if(stmt!=null)
+	     stmt.close();
+	 if(con!=null)
+	     con.close();
+
+`
+
 	
 	
 	

@@ -1,5 +1,5 @@
 ### JSP with Connection pool on Wildfly
-`sh
+```sh
 	
 	├── REAMD.md
 	├── WebContent
@@ -17,21 +17,22 @@
 	└── src
 
 
-`
+```
 
 ### Oracle 
 
-`sh
+```sh
+
 	docker run --name oracle19c --memory 3g -p 1521:1521 -p 5500:5500 -e ORACLE_PDB=orcl -e ORACLE_PWD=1qaz@WSX1234 -e ORACLE_MEM=4000 -v $PWD/oradata:/opt/oracle/oradata  --rm -it oracle/database:19.3.0-ee
 
 	# the oracle url is jdbc:oracle:thin:@192.168.1.167:1521/orcl
-
-`
+```
 
 
 ### Wilfly - https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaWebDBApp.html
 
-`sh
+
+```sh
 	
 	##Terminal 1
 	docker run -it --rm -p 8080:8080 -p 9990:9990 --name myboss  jboss/wildfly:8.2.1.Final sh 
@@ -41,11 +42,11 @@
 	
 	
 	/opt/jboss/wildfly/bin/standalone.sh -bmanagement=0.0.0.0 -b 0.0.0.0
-`
+```
 
 
 
-`sh
+```sh
 	##Terminal 2
 
 	## Copy file to container
@@ -82,21 +83,21 @@
 	## open http://localhost:9990/console/App.html
 	## datasources -> OraclePool -> Connection -> Test Connection
 	
-`
+```
 
 
-`sh
+```sh
 
 docker cp ~/Downloads/my-web.war /opt/jboss/wildfly/standalone/deployments/
 
 # open http://localhost:8080/my-web/index.html
 
-`
+```
 	
 	
 ### Connection Pool Using Java
 	
-`java
+```java
 	Context ic = new InitialContext();
 	 DataSource ds = (DataSource) ic.lookup("java:jboss/datasources/OracleDS");
 	 Connection con = ds.getConnection();
@@ -115,7 +116,7 @@ docker cp ~/Downloads/my-web.war /opt/jboss/wildfly/standalone/deployments/
 	 if(con!=null)
 	     con.close();
 
-`
+```
 
 	
 	
